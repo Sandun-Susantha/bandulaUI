@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="row no-gutters align-self-center">
+    <div class="col" style="text-align:center;text-decoration: underline overline;">
+      <h1> Bandula Driving School </h1>
+    </div>
+  </div>
+
+  <div class="row no-gutters">
+    <div class="col-6">
+      <h3 style="text-decoration: underline">Customer Details </h3>
+      <p>Sur name : {{surName}}</p>
+      <p>Name without sur name : {{lastName}}</p>
+      <p>NIC number : {{nic}}</p>
+      <p>Gender : {{gender}}</p>
+      <p>Birthday : {{birthday}}</p>
+    </div>
+    <div class="col-3">
+      <div class="address">
+        <h4>Bill nu : {{billNu}} </h4>
+        <p>bandulalearners@gmail.com</p>
+        <p>No 08, Old private bus stand</p>
+        <p>Mahiyanganaya</p>
+        <p>055 563 1111</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <img
+        src="../../assets/img/circle-croppedLogo.png"
+        alt="logotipo"
+        class="logotype" width="148" height="130" style="position: sticky;">
+    </div>
+  </div>
+
+  <div class="row no-gutters items-group">
+      <div class="col-6"><p>Applied driving licence classes : </p></div>
+        <div class="col-6">
+          <img *ngIf="ACtrl" src="../../assets/icons/A1.png">
+          <img *ngIf="aCls" src="../../assets/icons/A.png">
+          <img *ngIf="bOneCls" src="../../assets/icons/B1.png">
+          <img *ngIf="bCls" src="../../assets/icons/B.png">
+          <img *ngIf="gOneCls" src="../../assets/icons/G1.png">
+          <img *ngIf="cOnecls" src="../../assets/icons/C1.png">
+          <img *ngIf="cCls" src="../../assets/icons/C.png">
+          <img *ngIf="dOneCls" src="../../assets/icons/D1.png">
+          <img *ngIf="dCls" src="../../assets/icons/D.png">
+          <img *ngIf="jCls" src="../../assets/icons/J.png">
+          <img *ngIf="gCls" src="../../assets/icons/G.png">
+          <img *ngIf="dECls" src="../../assets/icons/DE.png">
+          <img *ngIf="cECls" src="../../assets/icons/CE.png">
+        </div>
+  </div>
+
+  <div class="row no-gutters items-group">
+    <div class="col-8">
+      <h4 class="label">Customer contact details</h4>
+      <p>Contact address :</p>
+      <p>{{homeName}}</p>
+      <p>{{streetName}}</p>
+      <p>{{villageName}}</p>
+      <p>{{cityName}}</p>
+      <p>{{district}}</p>
+    </div>
+
+    <div class="col-4">
+      <p>Old driving licence number : {{oldLicenNumber}}</p>
+      <p>Old driving license date : {{oldLicenDate}}:</p>
+      <p>Written exam date : {{examDate}}</p>
+      <p>Contact numbers : </p>
+      <p>{{mobile}}</p>
+      <p>{{secondaryMobile}}</p>
+      <p>{{landNumber}}</p>
+    </div>
+  </div>
+
+  <div class="row no-gutters items-group">
+    <div class="col">
+      <p class="label">Terms & Conditions :</p>
+      <ul class="disclaimer">
+        <li>Cash will not be returned for any reason</li>
+        <li>Application will be valid only for 6 months</li>
+        <li>If a customer failed the written exam or trail exam, that person have to have pay again 500.00/= rupees as exam fees.</li>
+        <li>The full payment should be complete within 3 months after registration.</li>
+        <!--<li>Os dados do cliente, acima mencionados, ficam registados na N Reparações apenas para efeitos de comunicação
+          em relação às suas assistências e facturação
+        </li>-->
+      </ul>
+    </div>
+  </div>
+
+  <div class="row no-gutters">
+    <div class="col">
+      <p>Advanced payment : {{advPay}}.00/=</p>
+    </div>
+    <div class="col">
+      <p>Remaining payment : {{remainingPay}}.00/=</p>
+    </div>
+    <div class="col">
+      <p>Charged Officer : {{chargedOfficer}}</p>
+    </div>
+    <div class="col">
+      <p>Branch : {{branch}}</p>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div class="row no-gutters">
+    <div class="col-4">
+      <p>.....................................</p>
+      <p>Charged Officers' Sign</p>
+    </div>
+    <div class="col-4">
+      <p>...........................</p>
+      <p>Customers' Sign</p>
+    </div>
+
+    <div class="col-4">
+      <p><br></p>
+      <p class="font-weight-bold">Date : {{date}}</p>
+    </div>
+  </div>
+  <br>
+  <button (click)="printPage()" id="print_button" class="btn btn-success float-right">print</button>
+</div>
+

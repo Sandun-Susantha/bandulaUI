@@ -1,0 +1,54 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="billNu">
+        <th mat-header-cell *matHeaderCellDef> Bill No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.billNu}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef> Full Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contactNum">
+        <th mat-header-cell *matHeaderCellDef> Contact Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.contactNum}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="examDate">
+        <th mat-header-cell *matHeaderCellDef> Exam Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.examDate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="examMarks">
+        <th mat-header-cell *matHeaderCellDef> Exam Marks </th>
+        <td mat-cell *matCellDef="let element"> {{element.examMarks}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trailDate">
+        <th mat-header-cell *matHeaderCellDef> Trail Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.trailDate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trailStatus">
+        <th mat-header-cell *matHeaderCellDef> Trail Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.trailStatus}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="remainingPay">
+        <th mat-header-cell *matHeaderCellDef> Remaining Payment </th>
+        <td mat-cell *matCellDef="let element"> {{element.remainingPay}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nic">
+        <th mat-header-cell *matHeaderCellDef> NIC </th>
+        <td mat-cell *matCellDef="let element"> {{element.nic}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[20, 30, 40]" showFirstLastButtons></mat-paginator>
+  </div>

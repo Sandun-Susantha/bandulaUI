@@ -1,0 +1,575 @@
+<div class="container">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="personalFormGroup">
+      <form [formGroup]="personalFormGroup">
+        <ng-template matStepLabel>Personal details</ng-template>
+
+        <mat-grid-list cols="5" rowHeight="2:1">
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input matInput name="surName" placeholder="Sur name of the customer" class="form-control" formControlName="surNameCtrl" required>
+              <mat-error *ngIf="personalFormGroup.controls.surNameCtrl.invalid">{{getSurnameInfoError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input matInput name="last_name" placeholder="Name without sur name" class="form-control" formControlName="lastNameCtrl" required>
+              <mat-error *ngIf="personalFormGroup.controls.lastNameCtrl.invalid">{{getLastnameError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>NIC Number</mat-label>
+              <input matInput placeholder="123456789V" class="form-control" formControlName="nicCtrl" required [value]="onNic()" (change)="updateBirthdayByNic()">
+              <mat-error *ngIf="personalFormGroup.controls.nicCtrl.invalid">{{getNicInfoError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label> _Birthday</mat-label>
+              <input matInput [matDatepicker]="birthDay" required formControlName="birthdayCtrl" ngModel="birthDayCal" (dateInput)="onBirthday()">
+              <mat-datepicker-toggle matSuffix [for]="birthDay"></mat-datepicker-toggle>
+              <mat-datepicker #birthDay></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Description</mat-label>
+              <input matInput placeholder="A friend of Mr. Gavin" class="form-control" formControlName="descriptionCtrl" class="example-full-width">
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <div>
+          <button mat-button matStepperNext class="btn btn-primary float-right">Next</button>
+        </div>
+
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="contactFormGroup">
+      <form [formGroup]="contactFormGroup">
+        <ng-template matStepLabel>Contact details</ng-template>
+
+        <mat-grid-list cols="4" rowHeight="2:1">
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Mobile Number</mat-label>
+              <input matInput placeholder="0712345678" class="form-control" formControlName="mobileCtrl" required>
+              <mat-error *ngIf="contactFormGroup.controls.mobileCtrl.invalid">{{getContactNuError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Land Number</mat-label>
+              <input matInput placeholder="0552257222" class="form-control" formControlName="landNumberCtrl">
+              <mat-error *ngIf="contactFormGroup.controls.mobileCtrl.invalid">{{getContactNuError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Mobile Number - Additional</mat-label>
+              <input matInput placeholder="0712345678" class="form-control" formControlName="mobileAdditionalCtrl">
+              <mat-error *ngIf="contactFormGroup.controls.mobileCtrl.invalid">{{getContactNuError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Email Address</mat-label>
+              <input matInput placeholder="email@email.com" class="form-control" formControlName="emailCtrl">
+              <mat-error *ngIf="contactFormGroup.controls.mobileCtrl.invalid">{{getEmailError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <mat-grid-list cols="5" rowHeight="2:1">
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Home Name</mat-label>
+              <input matInput placeholder="No 100, Bandula Niwasa" class="form-control" formControlName="homeNameCtrl" required>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Street Name</mat-label>
+              <input matInput placeholder="Sorabora Road" class="form-control" formControlName="streetNameCtrl">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Village</mat-label>
+              <input matInput placeholder="Sorabora" class="form-control" formControlName="villageNameCtrl">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>City</mat-label>
+              <input matInput placeholder="Mahiyanganaya" class="form-control" formControlName="cityCtrl">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>District</mat-label>
+              <mat-select formControlName="districtControl">
+                <mat-option value="Badulla">Badulla</mat-option>
+                <mat-option value="Ampara">Ampara</mat-option>
+                <mat-option value="Kandy">Kandy</mat-option>
+                <mat-option value="Matale">Matale</mat-option>
+                <mat-option value="Monaragala">Monaragala</mat-option>
+                <mat-option value="Polonnaruwa">Polonnaruwa</mat-option>
+                <mat-option value="Kalutara">Kalutara</mat-option>
+                <mat-option value="Kegalle">Kegalle</mat-option>
+                <mat-option value="Matara">Matara</mat-option>
+                <mat-option value="Galle">Galle</mat-option>
+                <mat-option value="Kurunegala">Kurunegala</mat-option>
+                <mat-option value="Anuradhapura">Anuradhapura</mat-option>
+                <mat-option value="Nuwara Eliya">Nuwara Eliya</mat-option>
+                <mat-option value="Ratnapura">Ratnapura</mat-option>
+                <mat-option value="Jaffna">Jaffna</mat-option>
+                <mat-option value="Kilinochchi">Kilinochchi</mat-option>
+                <mat-option value="Mannar">Mannar</mat-option>
+                <mat-option value="Mullaitivu">Mullaitivu</mat-option>
+                <mat-option value="Vavuniya">Vavuniya</mat-option>
+                <mat-option value="Puttalam">Puttalam</mat-option>
+                <mat-option value="Gampaha">Gampaha</mat-option>
+                <mat-option value="Colombo">Colombo</mat-option>
+                <mat-option value="Trincomalee">Trincomalee</mat-option>
+                <mat-option value="Batticaloa">Batticaloa</mat-option>
+                <mat-option value="Hambantota">Hambantota</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <div>
+          <button mat-button matStepperPrevious class="btn btn-primary float-left">Back</button>
+          <button mat-button matStepperNext class="btn btn-primary float-right">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="oldLicenseFormGroup">
+      <form [formGroup]="oldLicenseFormGroup">
+        <ng-template matStepLabel>Medical & License </ng-template>
+
+        <mat-grid-list cols="2" rowHeight="2:1">
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Old license Number</mat-label>
+              <input matInput placeholder="B800812" class="form-control" formControlName="oldLicenseCtrl" required>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>01/30/1998-licenseDate</mat-label>
+              <input matInput [matDatepicker]="licenDate" formControlName="licenseDateCtrl" (dateInput)="onLicenDate()">
+              <mat-datepicker-toggle matSuffix [for]="licenDate"></mat-datepicker-toggle>
+              <mat-datepicker #licenDate></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="3" rowHeight="2:1">
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Medical Number</mat-label>
+              <input matInput placeholder="B800812" class="form-control" formControlName="medicalNumberCtrl" required>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Blood Group</mat-label>
+              <mat-select formControlName="bloodControl">
+                <mat-option value="O−">O−</mat-option>
+                <mat-option value="O+">O+</mat-option>
+                <mat-option value="A−">A−</mat-option>
+                <mat-option value="A+">A+</mat-option>
+                <mat-option value="B−">B−</mat-option>
+                <mat-option value="B+">B+</mat-option>
+                <mat-option value="AB−">AB−</mat-option>
+                <mat-option value="AB+">AB+</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>01/30/1998-medical date</mat-label>
+              <input matInput [matDatepicker]="medicalDate" formControlName="medicalDateCtrl" (dateInput)="onMedicalDate()">
+              <mat-datepicker-toggle matSuffix [for]="medicalDate"></mat-datepicker-toggle>
+              <mat-datepicker #medicalDate [startAt]="1/30/1998"></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <div>
+          <button mat-button matStepperPrevious class="btn btn-primary float-left">Back</button>
+          <button mat-button matStepperNext class="btn btn-primary float-right">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="vehicleClassFormGroup">
+      <form [formGroup]="vehicleClassFormGroup">
+        <ng-template matStepLabel>Vehicle classes </ng-template>
+
+        <mat-slide-toggle class="float-right" color="warn" (change)="onChange($event)">{{trainingType}}</mat-slide-toggle>
+        <br>
+
+        <mat-grid-list cols="6" rowHeight="2:1">
+          <mat-grid-tile>
+            <mat-slide-toggle class="float-right" color="primary" (change)="onLightVehiUpdate($event)" formControlName="lightVehiCtrl">Light Vehicles</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/A1.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="AOneCtrl">A1 </mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/A.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="ACtrl">A</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/B1.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="BOneCtrl">B1</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/B.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="BCtrl">B</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/G1.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="GOneCtrl">G1</mat-slide-toggle>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="6" rowHeight="2:1">
+          <mat-grid-tile>
+            <mat-slide-toggle class="float-right" color="primary" (change)="onHeavyVehiUpdate($event)" formControlName="heavyVehiCtrl">Heavy Vehicles</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/C1.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="COneCtrl">C1</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/C.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="CCtrl">C</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/D1.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="DOneCtrl">D1</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/D.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="DCtrl">D</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/J.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="JCtrl">J</mat-slide-toggle>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="3" rowHeight="2:1">
+          <mat-grid-tile>
+            <img src="../../assets/icons/G.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="GCtrl">G</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/DE.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="DECtrl">DE</mat-slide-toggle>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <img src="../../assets/icons/CE.png">
+            <mat-slide-toggle class="float-right" color="primary" formControlName="CECtrl">CE</mat-slide-toggle>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <div>
+          <button mat-button matStepperPrevious class="btn btn-primary float-left">Back</button>
+          <button mat-button matStepperNext class="btn btn-primary float-right">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="paymentsFormGroup">
+      <form [formGroup]="paymentsFormGroup">
+        <ng-template matStepLabel>Exam & Payments </ng-template>
+
+        <mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label> _Exam date</mat-label>
+            <input matInput [matDatepicker]="exam_date" required formControlName="examCtrl" (dateInput)="onExamDate()">
+            <mat-datepicker-toggle matSuffix [for]="exam_date"></mat-datepicker-toggle>
+            <mat-datepicker #exam_date></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Charged payment</mat-label>
+              <input matInput placeholder="22500" class="form-control" formControlName="fullPayCtrl" required>
+              <mat-error *ngIf="paymentsFormGroup.controls.fullPayCtrl.invalid">{{getChargedPaymentError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Addvanced payment</mat-label>
+              <input matInput placeholder="3500" class="form-control" formControlName="advancedPayCtrl">
+              <mat-error *ngIf="paymentsFormGroup.controls.advancedPayCtrl.invalid">{{getAdvancedPayError()}}</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <div>
+          <button mat-button matStepperPrevious class="btn btn-primary float-left">Back</button>
+          <button mat-button matStepperNext class="btn btn-primary float-right">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <form [formGroup]="reviewFormGroup">
+
+        <ng-template matStepLabel>Review</ng-template>
+        <mat-card-title>Personal details.</mat-card-title>
+        <mat-grid-list cols="3" rowHeight="8:1">
+          <mat-grid-tile>
+            <label class="mat-tab-label">First name : </label>
+            <label class="font-weight-bold"> {{personalFormGroup.getRawValue().surNameCtrl}} </label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Last name : </label>
+            <label class="font-weight-bold"> {{personalFormGroup.getRawValue().lastNameCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">NIC number : </label>
+            <label class="font-weight-bold"> {{personalFormGroup.getRawValue().nicCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Birthday : </label>
+            <label class="font-weight-bold"> {{displayBirthday}}</label>
+            <!--          <label class="font-weight-bold"> {{birthDayCal}}</label>-->
+            <!--          <label class="font-weight-bold"> {{personalFormGroup.getRawValue().birthdayCtrl}}</label>-->
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <label class="mat-tab-label">Gender : </label>
+            <label class="font-weight-bold"> {{displayGender}}</label>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <label class="mat-tab-label">Description : </label>
+            <label class="font-weight-bold"> {{personalFormGroup.getRawValue().descriptionCtrl}}</label>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <br>
+        <br>
+
+        <mat-card-title>Contact details</mat-card-title>
+        <mat-grid-list cols="4" rowHeight="5:1">
+          <mat-grid-tile>
+            <label class="mat-tab-label">Mobile Number : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().mobileCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Land Number :</label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().landNumberCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Secondry Mobile Number : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().mobileAdditionalCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Email : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().emailCtrl}}</label>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="5" rowHeight="2:0.4">
+          <mat-grid-tile>
+            <label class="mat-tab-label">Home Name : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().homeNameCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Street Name : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().streetNameCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Village Name : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().villageNameCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">City Name : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().cityCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">District : </label>
+            <label class="font-weight-bold"> {{contactFormGroup.getRawValue().districtControl}}</label>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <br>
+        <br>
+
+        <mat-card-title>Medical and license details.</mat-card-title>
+        <mat-grid-list cols="5" rowHeight="5:1">
+          <mat-grid-tile>
+            <label class="mat-tab-label">Old license Number : </label>
+            <label class="font-weight-bold"> {{oldLicenseFormGroup.getRawValue().oldLicenseCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Old license Date : </label>
+            <!--          <label class="font-weight-bold"> {{licenDate}}</label>-->
+            <label class="font-weight-bold"> {{diaplayLicenDate}}</label>
+            <!--          <label class="font-weight-bold"> {{oldLicenseFormGroup.getRawValue().licenseDateCtrl}}</label>-->
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Medical Number : </label>
+            <label class="font-weight-bold"> {{oldLicenseFormGroup.getRawValue().medicalNumberCtrl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Blood Group : </label>
+            <label class="font-weight-bold"> {{oldLicenseFormGroup.getRawValue().bloodControl}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Medical Date : </label>
+            <!--          <label class="font-weight-bold"> {{medicalDate}}</label>-->
+            <label class="font-weight-bold"> {{displayMedicalDate}}</label>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <br>
+        <br>
+
+        <mat-card-title>Vehicle classes.</mat-card-title> <span> - {{trainingType}}</span>
+        <mat-grid-list cols="5" rowHeight="5:1">
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().AOneCtrl">
+            <img src="../../assets/icons/A1.png">
+            <!--          <label class="font-weight-bold"> {{vehicleClassFormGroup.getRawValue().AOneCtrl}}</label>-->
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().ACtrl">
+            <img src="../../assets/icons/A.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().BOneCtrl">
+            <img src="../../assets/icons/B1.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().BCtrl">
+            <img src="../../assets/icons/B.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().GOneCtrl">
+            <img src="../../assets/icons/G1.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().COneCtrl">
+            <img src="../../assets/icons/C1.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().CCtrl">
+            <img src="../../assets/icons/C.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().DOneCtrl">
+            <img src="../../assets/icons/D1.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().DCtrl">
+            <img src="../../assets/icons/D.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().JCtrl">
+            <img src="../../assets/icons/J.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().GCtrl">
+            <img src="../../assets/icons/G.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().DECtrl">
+            <img src="../../assets/icons/DE.png">
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="vehicleClassFormGroup.getRawValue().CECtrl">
+            <img src="../../assets/icons/CE.png">
+          </mat-grid-tile>
+        </mat-grid-list>
+        <br>
+        <br>
+        <mat-card-title>Payment details.</mat-card-title>
+        <mat-grid-list cols="4" rowHeight="5:1">
+          <mat-grid-tile>
+            <label class="mat-tab-label">Exam date : </label>
+            <label class="font-weight-bold"> {{displayExam}}</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Charged payment : </label>
+            <label class="font-weight-bold"> {{paymentsFormGroup.getRawValue().fullPayCtrl}}.00/=</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Addvanced payment : </label>
+            <label class="font-weight-bold"> {{paymentsFormGroup.getRawValue().advancedPayCtrl}}.00/=</label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Remaining Payment : </label>
+            <label class="font-weight-bold"> {{paymentsFormGroup.getRawValue().fullPayCtrl-paymentsFormGroup.getRawValue().advancedPayCtrl}}.00/=</label>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-card-title>Officer & branch details.</mat-card-title>
+        <mat-grid-list cols="3" rowHeight="5:1">
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Charged Officer</mat-label>
+              <mat-select formControlName="chargedOfficerCtrl">
+                <mat-option value="Mr. Gavin Vijith">Mr. Gavin Vijith</mat-option>
+                <mat-option value="Ms. Mangalika">Ms. Mangalika</mat-option>
+                <mat-option value="Mr. Dineth Dulanjana">Mr. Dineth Dulanjana</mat-option>
+                <mat-option value="Mr. Dinuka Kaluarachchi">Mr. Dinuka Kaluarachchi</mat-option>
+                <mat-option value="Ms. Saranga">Ms. Saranga</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Branch : </label>
+            <label class="font-weight-bold"> Mahiyanganaya </label>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label class="mat-tab-label">Date : </label>
+            <label class="font-weight-bold"> {{today}}</label>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <div>
+          <button mat-button matStepperPrevious class="btn btn-primary float-left">Back</button>
+          <button routerLink="printNewCustomer" mat-icon-button mat-button (click)="newCustomer()" class="btn btn-primary float-right" type="submit">Print & Save</button>
+<!--          <button mat-icon-button mat-button (click)="newCustomer()" class="btn btn-primary float-right" type="submit">Print & Save</button>-->
+          <button mat-button class="btn btn-danger float-right" (click)="stepper.reset()">Reset</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>
