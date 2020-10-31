@@ -231,9 +231,9 @@ export class PersonalDetailsComponent implements OnInit {
   }
 
   onNic(){
-    this.daysOfDoB = this.personalFormGroup.getRawValue().nicCtrl.substr(2,3);
-    if (this.personalFormGroup.getRawValue().nicCtrl.length<12){
-       if (this.daysOfDoB<500){
+    if (this.personalFormGroup.getRawValue().nicCtrl.length<11){
+      this.daysOfDoB = this.personalFormGroup.getRawValue().nicCtrl.substr(2,3);
+      if (this.daysOfDoB<500){
          this.displayGender = 'Male'
          this.genderValue = true;
          this.birthDayCal = moment().dayOfYear(this.daysOfDoB).format('MM-DD');
@@ -243,7 +243,8 @@ export class PersonalDetailsComponent implements OnInit {
          this.birthDayCal = moment().dayOfYear(this.daysOfDoB-500).format('MM-DD');
        }
       this.birthDayCal = '19' + this.personalFormGroup.getRawValue().nicCtrl.substr(0,2)+ '-' + this.birthDayCal
-    } else if (this.personalFormGroup.getRawValue().nicCtrl.length>12) {
+    } else if (this.personalFormGroup.getRawValue().nicCtrl.length>11) {
+      this.daysOfDoB = this.personalFormGroup.getRawValue().nicCtrl.substr(4,3);
       if (this.daysOfDoB < 500) {
         this.displayGender = 'Male'
         this.genderValue = true;
@@ -252,27 +253,9 @@ export class PersonalDetailsComponent implements OnInit {
         this.genderValue = false;
       }
       this.birthDayCal = moment().dayOfYear(this.daysOfDoB).format('MM-DD');
-      this.birthDayCal =this.personalFormGroup.getRawValue().nicCtrl.substr(0,3) + '-' +this.birthDayCal
-    }
-  }
-
-  updateBirthdayByNic(){
-    if (this.personalFormGroup.getRawValue().nicCtrl.length<12){
-      if (this.daysOfDoB<500){
-        this.displayBirthday = moment().dayOfYear(this.daysOfDoB).format('MM-DD');
-      }else {
-        this.displayBirthday = moment().dayOfYear(this.daysOfDoB-500).format('MM-DD');
-      }
-      this.displayBirthday = this.birthDayCal
-    } else if (this.personalFormGroup.getRawValue().nicCtrl.length>12) {
-      if (this.daysOfDoB < 500) {
-      } else {
-      }
-      this.displayBirthday = moment().dayOfYear(this.daysOfDoB).format('MM-DD');
-      this.displayBirthday =this.birthDayCal
+      this.birthDayCal =this.personalFormGroup.getRawValue().nicCtrl.substr(0,4) + '-' +this.birthDayCal
     }
     this.personalFormGroup.controls.birthdayCtrl.setValue(this.birthDayCal);
-    // console.log(this.birthDayCal);
   }
 
   onBirthday(){
