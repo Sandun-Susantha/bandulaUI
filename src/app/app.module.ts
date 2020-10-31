@@ -12,6 +12,7 @@ import {ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { PrintRegisterationComponent } from './print-registeration/print-registeration.component';
 import { HttpClientModule} from "@angular/common/http";
 import { RegistrationBillComponent } from './registration-bill/registration-bill.component';
+import { PrintButtonComponent } from './print-button/print-button.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegistrationBillComponent } from './registration-bill/registration-bill
     ToolbarComponent,
     HomeComponent,
     PrintRegisterationComponent,
-    RegistrationBillComponent
+    RegistrationBillComponent,
+    PrintButtonComponent
   ],
     imports: [
         BrowserModule,

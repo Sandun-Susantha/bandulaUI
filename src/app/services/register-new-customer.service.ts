@@ -110,7 +110,8 @@ export class RegisterNewCustomerService {
   getNewCustomerDetails(billNu:string, surName: string, lastName: string, nic: string, birthday: string, gender:string, descrption:string, mobileNumber:string, landNumber:string, secondaryMobile:string, email:string,
                         homeName:string, streetName:string, villageName:string, cityName:string, district:string, oldLicenNumber:string, oldLicenDate:string, medicalNum: string, bloodGroup:string, medicalDate:string,
                         aOneCls:boolean, aCls:boolean, bOneCls:boolean, bCls:boolean, gOneCls:boolean, cOnecls:boolean, cCls:boolean, dOneCls:boolean, dCls:boolean, jCls:boolean, gCls:boolean, dECls:boolean, cECls:boolean,
-                        examDate:string,chagedPay:string,advPay:string,remainingPay:number, chargedOfficer:string,branch:string,date:string){
+                        examDate:string,chagedPay:string,advPay:string,remainingPay:number, chargedOfficer:string,branch:string,date:string)
+  {
     this.billNu.next(billNu), this.surName.next(surName); this.lastName.next(lastName); this.nic.next(nic); this.birthday.next(birthday); this.gender.next(gender);this.description.next(descrption)
     this.mobile.next(mobileNumber), this.landNumber.next(landNumber), this.secondaryMobile.next(secondaryMobile), this.email.next(email)
     this.homeName.next(homeName),this.streetName.next(streetName),this.villageName.next(villageName),this.cityName.next(cityName),this.district.next(district)
@@ -132,6 +133,5 @@ export class RegisterNewCustomerService {
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*'
       })});
-
   }
 }

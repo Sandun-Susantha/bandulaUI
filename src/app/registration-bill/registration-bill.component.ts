@@ -11,10 +11,4 @@ export class RegistrationBillComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  printPage(){
-    
-    window.print();
-  }
-
 }

@@ -57,8 +57,6 @@ export class PrintRegisterationComponent implements OnInit {
   branch:string
   date:string
 
-
-
   constructor(private newCustomerDetails: RegisterNewCustomerService) { }
 
   ngOnInit(): void {
@@ -112,6 +110,7 @@ export class PrintRegisterationComponent implements OnInit {
     this.newCustomerDetails.currentDate.subscribe(date => this.date = date)
     this.newCustomerDetails.currentBillNu.subscribe(billNu => this.billNu = billNu)
     // window.print()
+    // console.log('bill from print : '+this.billNu)
   }
 
   printPage(){

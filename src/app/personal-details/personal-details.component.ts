@@ -292,16 +292,18 @@ export class PersonalDetailsComponent implements OnInit {
   }
   today = moment(Date.now()).format('YYYY-MM-DD')
 
-  promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log("Async Work Complete");
-      resolve();
-    }, 1000);
-  });
-
   newCustomer(){
     this.newCustomerData.register(
-      "{"+"\"surName\":\""+this.personalFormGroup.controls.surNameCtrl.value+"\",\"cusName\":\""+this.personalFormGroup.controls.lastNameCtrl.value+"\",\"gender\":\""+this.genderValue+"\",\"oldLicenNum\":\""+this.oldLicenseFormGroup.controls.oldLicenseCtrl.value+"\",\"licenDate\":\""+this.diaplayLicenDate+"\",\"nicNumber\":\""+this.personalFormGroup.controls.nicCtrl.value+"\",\"birthDay\":\""+this.displayBirthday+"\",\"isShortTerm\":\""+this.isShortTerm+"\",\"description\":\""+this.personalFormGroup.controls.descriptionCtrl.value+"\",\"medicalNu\":\""+this.oldLicenseFormGroup.controls.medicalNumberCtrl.value+"\",\"medicalDate\":\""+this.displayMedicalDate+"\",\"bloodGroup\":\""+this.oldLicenseFormGroup.controls.bloodControl.value+"\","+"\"writtenExamDetailsBeanList\":[{\"newExamDate\":\""+this.displayExam+"\"}]"+","+"\"contactDetailsBean\":{\"cusEmail\":\""+this.contactFormGroup.controls.emailCtrl.value+"\",\"mobilePrimary\":\""+this.contactFormGroup.controls.mobileCtrl.value+"\",\"mobileSecondary\":\""+this.contactFormGroup.controls.mobileAdditionalCtrl.value+"\",\"landNumber\":\""+this.contactFormGroup.controls.landNumberCtrl.value+"\",\"homeName\":\""+this.contactFormGroup.controls.homeNameCtrl.value+"\",\"streetName\":\""+this.contactFormGroup.controls.streetNameCtrl.value+"\",\"villageName\":\""+this.contactFormGroup.controls.villageNameCtrl.value+"\",\"cityName\":\""+this.contactFormGroup.controls.cityCtrl.value+"\",\"district\":\""+this.contactFormGroup.controls.districtControl.value+"\""+"},"+"\"vehicleClassesBean\":{\"a1\":"+
+      "{"+"\"surName\":\""+this.personalFormGroup.controls.surNameCtrl.value+"\",\"cusName\":\""+this.personalFormGroup.controls.lastNameCtrl.value+"\",\"gender\":\""+this.genderValue
+      +"\",\"oldLicenNum\":\""+this.oldLicenseFormGroup.controls.oldLicenseCtrl.value+"\",\"licenDate\":\""+this.diaplayLicenDate+"\",\"nicNumber\":\""+this.personalFormGroup.controls.nicCtrl.value
+      +"\",\"birthDay\":\""+this.displayBirthday+"\",\"isShortTerm\":\""+this.isShortTerm+"\",\"description\":\""+this.personalFormGroup.controls.descriptionCtrl.value
+      +"\",\"medicalNu\":\""+this.oldLicenseFormGroup.controls.medicalNumberCtrl.value+"\",\"medicalDate\":\""+this.displayMedicalDate+"\",\"bloodGroup\":\""
+      +this.oldLicenseFormGroup.controls.bloodControl.value+"\","+"\"writtenExamDetailsBeanList\":[{\"newExamDate\":\""+this.displayExam+"\"}]"+","
+      +"\"contactDetailsBean\":{\"cusEmail\":\""+this.contactFormGroup.controls.emailCtrl.value+"\",\"mobilePrimary\":\""+this.contactFormGroup.controls.mobileCtrl.value
+      +"\",\"mobileSecondary\":\""+this.contactFormGroup.controls.mobileAdditionalCtrl.value+"\",\"landNumber\":\""+this.contactFormGroup.controls.landNumberCtrl.value+"\",\"homeName\":\""
+      +this.contactFormGroup.controls.homeNameCtrl.value+"\",\"streetName\":\""+this.contactFormGroup.controls.streetNameCtrl.value+"\",\"villageName\":\""
+      +this.contactFormGroup.controls.villageNameCtrl.value+"\",\"cityName\":\""+this.contactFormGroup.controls.cityCtrl.value+"\",\"district\":\""
+      +this.contactFormGroup.controls.districtControl.value+"\""+"},"+"\"vehicleClassesBean\":{\"a1\":"+
       this.vehicleClassFormGroup.controls.AOneCtrl.value+
       ",\"a\":"+this.vehicleClassFormGroup.controls.ACtrl.value+
       ",\"b1\":"+this.vehicleClassFormGroup.controls.BOneCtrl.value+
@@ -315,57 +317,61 @@ export class PersonalDetailsComponent implements OnInit {
       ",\"g1\":"+this.vehicleClassFormGroup.controls.GOneCtrl.value+
       ",\"g\":"+this.vehicleClassFormGroup.controls.GCtrl.value+
       ",\"j\":"+this.vehicleClassFormGroup.controls.JCtrl.value+
-      "},"+"\"advancedPaymentBean\":{"+"\"amountChargeable\":"+this.paymentsFormGroup.controls.fullPayCtrl.value+","+"\"addvancedPayment\":"+this.paymentsFormGroup.controls.advancedPayCtrl.value+","+"\"chargedOfficer\":"+"\""+this.reviewFormGroup.controls.chargedOfficerCtrl.value+"\""+","+"\"branch\":"+"\"Mahiyanganaya\""+","+"\"paymentDate\":"+"\""+this.today+"\""+"}"+"}"
+      "},"+"\"advancedPaymentBean\":{"+"\"amountChargeable\":"+this.paymentsFormGroup.controls.fullPayCtrl.value+","+"\"addvancedPayment\":"+this.paymentsFormGroup.controls.advancedPayCtrl.value+","
+      +"\"chargedOfficer\":"+"\""+this.reviewFormGroup.controls.chargedOfficerCtrl.value+"\""+","+"\"branch\":"+"\"Mahiyanganaya\""+","+"\"paymentDate\":"+"\""+this.today+"\""+"}"+"}"
     ).subscribe(
-      response => (this.billNu=response.customerId,console.log('bill : '+this.billNu)),
+      response => (this.billNu=response.customerId),
       error => console.log('Error.!', error),
-
     )
 
-    console.log('Bill after submit: '+this.billNu)
-
-    this.newCustomerData.getNewCustomerDetails(
-      this.billNu,
-      this.personalFormGroup.controls.surNameCtrl.value,
-      this.personalFormGroup.controls.lastNameCtrl.value,
-      this.personalFormGroup.controls.nicCtrl.value,
-      this.displayBirthday,
-      this.displayGender,
-      this.personalFormGroup.controls.descriptionCtrl.value,
-      this.contactFormGroup.controls.mobileCtrl.value,
-      this.contactFormGroup.controls.landNumberCtrl.value,
-      this.contactFormGroup.controls.mobileAdditionalCtrl.value,
-      this.contactFormGroup.controls.emailCtrl.value,
-      this.contactFormGroup.controls.homeNameCtrl.value,
-      this.contactFormGroup.controls.streetNameCtrl.value,
-      this.contactFormGroup.controls.villageNameCtrl.value,
-      this.contactFormGroup.controls.cityCtrl.value,
-      this.contactFormGroup.controls.districtControl.value,
-      this.oldLicenseFormGroup.controls.oldLicenseCtrl.value,
-      this.diaplayLicenDate,
-      this.oldLicenseFormGroup.controls.medicalNumberCtrl.value,
-      this.oldLicenseFormGroup.controls.bloodControl.value,
-      this.displayMedicalDate,
-      this.vehicleClassFormGroup.controls.AOneCtrl.value,
-      this.vehicleClassFormGroup.controls.ACtrl.value,
-      this.vehicleClassFormGroup.controls.BOneCtrl.value,
-      this.vehicleClassFormGroup.controls.BCtrl.value,
-      this.vehicleClassFormGroup.controls.GOneCtrl.value,
-      this.vehicleClassFormGroup.controls.COneCtrl.value,
-      this.vehicleClassFormGroup.controls.CCtrl.value,
-      this.vehicleClassFormGroup.controls.DOneCtrl.value,
-      this.vehicleClassFormGroup.controls.DCtrl.value,
-      this.vehicleClassFormGroup.controls.JCtrl.value,
-      this.vehicleClassFormGroup.controls.GCtrl.value,
-      this.vehicleClassFormGroup.controls.DECtrl.value,
-      this.vehicleClassFormGroup.controls.CECtrl.value,
-      this.displayExam,
-      this.paymentsFormGroup.controls.fullPayCtrl.value,
-      this.paymentsFormGroup.controls.advancedPayCtrl.value,
-      this.paymentsFormGroup.controls.fullPayCtrl.value-this.paymentsFormGroup.controls.advancedPayCtrl.value,
-      this.reviewFormGroup.controls.chargedOfficerCtrl.value,
-      "Mahiyanganaya",
-      this.today,
-    )
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.newCustomerData.getNewCustomerDetails(
+          this.billNu,
+          this.personalFormGroup.controls.surNameCtrl.value,
+          this.personalFormGroup.controls.lastNameCtrl.value,
+          this.personalFormGroup.controls.nicCtrl.value,
+          this.displayBirthday,
+          this.displayGender,
+          this.personalFormGroup.controls.descriptionCtrl.value,
+          this.contactFormGroup.controls.mobileCtrl.value,
+          this.contactFormGroup.controls.landNumberCtrl.value,
+          this.contactFormGroup.controls.mobileAdditionalCtrl.value,
+          this.contactFormGroup.controls.emailCtrl.value,
+          this.contactFormGroup.controls.homeNameCtrl.value,
+          this.contactFormGroup.controls.streetNameCtrl.value,
+          this.contactFormGroup.controls.villageNameCtrl.value,
+          this.contactFormGroup.controls.cityCtrl.value,
+          this.contactFormGroup.controls.districtControl.value,
+          this.oldLicenseFormGroup.controls.oldLicenseCtrl.value,
+          this.diaplayLicenDate,
+          this.oldLicenseFormGroup.controls.medicalNumberCtrl.value,
+          this.oldLicenseFormGroup.controls.bloodControl.value,
+          this.displayMedicalDate,
+          this.vehicleClassFormGroup.controls.AOneCtrl.value,
+          this.vehicleClassFormGroup.controls.ACtrl.value,
+          this.vehicleClassFormGroup.controls.BOneCtrl.value,
+          this.vehicleClassFormGroup.controls.BCtrl.value,
+          this.vehicleClassFormGroup.controls.GOneCtrl.value,
+          this.vehicleClassFormGroup.controls.COneCtrl.value,
+          this.vehicleClassFormGroup.controls.CCtrl.value,
+          this.vehicleClassFormGroup.controls.DOneCtrl.value,
+          this.vehicleClassFormGroup.controls.DCtrl.value,
+          this.vehicleClassFormGroup.controls.JCtrl.value,
+          this.vehicleClassFormGroup.controls.GCtrl.value,
+          this.vehicleClassFormGroup.controls.DECtrl.value,
+          this.vehicleClassFormGroup.controls.CECtrl.value,
+          this.displayExam,
+          this.paymentsFormGroup.controls.fullPayCtrl.value,
+          this.paymentsFormGroup.controls.advancedPayCtrl.value,
+          this.paymentsFormGroup.controls.fullPayCtrl.value-this.paymentsFormGroup.controls.advancedPayCtrl.value,
+          this.reviewFormGroup.controls.chargedOfficerCtrl.value,
+          "Mahiyanganaya",
+          this.today,
+        )
+        console.log('Bill after submit: '+this.billNu)
+        resolve();
+      }, 8000);
+    });
   }
 }

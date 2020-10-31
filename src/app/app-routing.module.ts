@@ -8,8 +8,8 @@ import {RegistrationBillComponent} from "./registration-bill/registration-bill.c
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'admin/addNew',component:PersonalDetailsComponent},
-  // {path:'admin/addNew/printNewCustomer',component:RegistrationBillComponent}
-  {path:'admin/addNew/printNewCustomer',component:PrintRegisterationComponent}
+  {path:'admin/addNew/printNewCustomer',component:RegistrationBillComponent}
+  // {path:'admin/addNew/printNewCustomer',component:PrintRegisterationComponent}
 ];
 
 @NgModule({
