@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule , FormsModule} from '@angular/forms';
-import { RegisterNewCustomerService } from '../services/register-new-customer.service'
+import { CustomerService } from '../services/customer.service'
 
 import {
   MomentDateAdapter,
@@ -55,7 +55,7 @@ export class PersonalDetailsComponent implements OnInit {
   fname = "";
 
 
-  constructor(private newCustomerData: RegisterNewCustomerService, private formStepper: FormBuilder, fb: FormBuilder) {
+  constructor(private newCustomerData: CustomerService, private formStepper: FormBuilder, fb: FormBuilder) {
   }
 
   // tslint:disable-next-line:typedef
@@ -76,7 +76,7 @@ export class PersonalDetailsComponent implements OnInit {
       landNumberCtrl: ['', [Validators.required,Validators.pattern("^[0-9]{10}$")]],
       mobileAdditionalCtrl: ['',[Validators.required,Validators.pattern("^[0-9]{10}$")]],
       emailCtrl: ['', [Validators.required, Validators.email]],
-      homeNameCtrl: ['', Validators.required,Validators.pattern("^[0-9]{10}$")],
+      homeNameCtrl: ['', Validators.required],
       streetNameCtrl: ['', Validators.required],
       villageNameCtrl: ['', Validators.required],
       cityCtrl: ['', Validators.required],
@@ -255,6 +255,9 @@ export class PersonalDetailsComponent implements OnInit {
       this.birthDayCal = moment().dayOfYear(this.daysOfDoB).format('MM-DD');
       this.birthDayCal =this.personalFormGroup.getRawValue().nicCtrl.substr(0,4) + '-' +this.birthDayCal
     }
+  }
+
+  updateBirthdayByNic(){
     this.personalFormGroup.controls.birthdayCtrl.setValue(this.birthDayCal);
   }
 

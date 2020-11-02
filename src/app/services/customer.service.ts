@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
-import { BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
+import { ICustomers} from "./icustomers";
+
 // import any = jasmine.any;
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterNewCustomerService {
+export class CustomerService {
 
-  _url = 'http://localhost:8080/admin/api/post/newCustomer';
+  registerApi = 'http://localhost:8080/admin/api/post/newCustomer';
+
+  getAllCustomersApi = 'http://localhost:8080/admin/api/get/getAllCustomers';
+  getCustemrByNicApi = 'http://localhost:8080/admin/api/nic/985011141V';
 
   private billNu = new BehaviorSubject<string>("");
 
@@ -125,13 +130,17 @@ export class RegisterNewCustomerService {
     headers.append('Content-Type', 'application/json');
   }
 
-  register(newUser){
+  register(newCustomer){
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-     return this._http.post<any>(this._url, newUser,{headers: new HttpHeaders({
+     return this._http.post<any>(this.registerApi, newCustomer,{headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*'
       })});
+  }
+
+  getCustomers(): Observable<ICustomers[]>{
+    return this._http.get<ICustomers[]>(this.getAllCustomersApi);
   }
 }

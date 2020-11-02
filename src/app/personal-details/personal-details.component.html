@@ -24,7 +24,7 @@
           <mat-grid-tile>
             <mat-form-field>
               <mat-label>NIC Number</mat-label>
-              <input matInput placeholder="123456789V" class="form-control" formControlName="nicCtrl" required [value]="onNic()">
+              <input matInput placeholder="123456789V" class="form-control" formControlName="nicCtrl" required [value]="onNic()" (change)="updateBirthdayByNic()">
               <mat-error *ngIf="personalFormGroup.controls.nicCtrl.invalid">{{getNicInfoError()}}</mat-error>
             </mat-form-field>
           </mat-grid-tile>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterNewCustomerService } from '../services/register-new-customer.service'
+import { CustomerService } from '../services/customer.service'
 import {register} from "ts-node";
 
 @Component({
@@ -57,7 +57,7 @@ export class PrintRegisterationComponent implements OnInit {
   branch:string
   date:string
 
-  constructor(private newCustomerDetails: RegisterNewCustomerService) { }
+  constructor(private newCustomerDetails: CustomerService) { }
 
   ngOnInit(): void {
 
