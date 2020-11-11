@@ -109,8 +109,6 @@ export class PrintRegisterationComponent implements OnInit {
     this.newCustomerDetails.currentBranch.subscribe(branch => this.branch = branch)
     this.newCustomerDetails.currentDate.subscribe(date => this.date = date)
     this.newCustomerDetails.currentBillNu.subscribe(billNu => this.billNu = billNu)
-    // window.print()
-    // console.log('bill from print : '+this.billNu)
   }
 
   printPage(){

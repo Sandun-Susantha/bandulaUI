@@ -13,6 +13,7 @@ import { PrintRegisterationComponent } from './print-registeration/print-registe
 import { HttpClientModule} from "@angular/common/http";
 import { RegistrationBillComponent } from './registration-bill/registration-bill.component';
 import { PrintButtonComponent } from './print-button/print-button.component';
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PrintButtonComponent } from './print-button/print-button.component';
     HomeComponent,
     PrintRegisterationComponent,
     RegistrationBillComponent,
-    PrintButtonComponent
+    PrintButtonComponent,
+    ViewCustomerComponent
   ],
     imports: [
         BrowserModule,

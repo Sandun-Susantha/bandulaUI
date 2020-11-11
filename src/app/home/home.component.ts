@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { CustomerService } from '../services/customer.service'
-import { ICustomers} from "../services/icustomers";
+import { ICustomers} from "../../assets/icustomers";
+import {ViewCustomerService} from "../services/view-customer.service";
 
 @Component({
   selector: 'app-home',
@@ -12,14 +13,13 @@ import { ICustomers} from "../services/icustomers";
 })
 export class HomeComponent implements OnInit {
   customers: ICustomers[];
-  allCustomers : [];
 
-  displayedColumns: string[] = ['billNu', 'customerName', 'villageName', 'cityName', 'contactNum', 'examDate', 'remainingPay', 'nic'];
+  displayedColumns: string[] = ['billNu', 'customerName', 'villageName', 'cityName', 'contactNum', 'examDate', 'remainingPay', 'chargedOfficer', 'nic'];
   dataSource = new MatTableDataSource<ICustomers>(this.customers);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private _customerService: CustomerService) {}
+  constructor(private _customerService: CustomerService, private _viewService: ViewCustomerService) {}
 
   ngOnInit() {
     this._customerService.getCustomers().subscribe(data => this.customers = data);
@@ -29,6 +29,23 @@ export class HomeComponent implements OnInit {
         this.dataSource = new MatTableDataSource<ICustomers>(this.customers);
         resolve();
       }, 1000);
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onSelectRaw(customer : ICustomers){
+
+    this._viewService.getSelectedCustomerNic(customer.nicNumber.toString())
+
+    new Promise((resolve) => {
+      setTimeout(() => {
+        // this._viewService.getSelectedCustomerNic(customer.nicNumber.toString())
+        resolve();
+      }, 8000);
     });
   }
 }

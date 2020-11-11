@@ -4,12 +4,14 @@ import { PersonalDetailsComponent } from "./personal-details/personal-details.co
 import { HomeComponent } from "./home/home.component";
 import { PrintRegisterationComponent} from "./print-registeration/print-registeration.component";
 import {RegistrationBillComponent} from "./registration-bill/registration-bill.component";
+import {ViewCustomerComponent} from "./view-customer/view-customer.component";
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'admin/addNew',component:PersonalDetailsComponent},
-  {path:'admin/addNew/printNewCustomer',component:RegistrationBillComponent}
+  {path:'admin/addNew/printNewCustomer',component:RegistrationBillComponent},
   // {path:'admin/addNew/printNewCustomer',component:PrintRegisterationComponent}
+  {path:'admin/api/nic', component:ViewCustomerComponent}
 ];
 
 @NgModule({

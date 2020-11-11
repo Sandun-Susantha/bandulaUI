@@ -310,7 +310,7 @@ export class PersonalDetailsComponent implements OnInit {
       error => console.log('Error.!', error),
     )
 
-    new Promise((resolve, reject) => {
+    new Promise((resolve) => {
       setTimeout(() => {
         this.newCustomerData.getNewCustomerDetails(
           this.billNu,

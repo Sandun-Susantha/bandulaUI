@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
-import { ICustomers} from "./icustomers";
+import { ICustomers} from "../../assets/icustomers";
+import {shareReplay, tap} from "rxjs/operators";
 
 // import any = jasmine.any;
 
@@ -13,7 +14,6 @@ export class CustomerService {
   registerApi = 'http://localhost:8080/admin/api/post/newCustomer';
 
   getAllCustomersApi = 'http://localhost:8080/admin/api/get/getAllCustomers';
-  getCustemrByNicApi = 'http://localhost:8080/admin/api/nic/985011141V';
 
   private billNu = new BehaviorSubject<string>("");
 
@@ -62,6 +62,13 @@ export class CustomerService {
   private chargedOfficer = new BehaviorSubject<string>("");
   private branch = new BehaviorSubject<string>("");
   private date = new BehaviorSubject<string>("");
+
+  private selectedNic = new BehaviorSubject<string>("")
+
+  currentSelectedNic = this.selectedNic.asObservable()
+
+  private getByNic = new BehaviorSubject<string>("")
+  getCustomerByNicApi = this.getByNic.asObservable()
 
   currentBillNu = this.billNu.asObservable()
 
@@ -112,6 +119,7 @@ export class CustomerService {
   currentDate = this.date.asObservable()
 
   constructor(private _http: HttpClient) {  }
+
   getNewCustomerDetails(billNu:string, surName: string, lastName: string, nic: string, birthday: string, gender:string, descrption:string, mobileNumber:string, landNumber:string, secondaryMobile:string, email:string,
                         homeName:string, streetName:string, villageName:string, cityName:string, district:string, oldLicenNumber:string, oldLicenDate:string, medicalNum: string, bloodGroup:string, medicalDate:string,
                         aOneCls:boolean, aCls:boolean, bOneCls:boolean, bCls:boolean, gOneCls:boolean, cOnecls:boolean, cCls:boolean, dOneCls:boolean, dCls:boolean, jCls:boolean, gCls:boolean, dECls:boolean, cECls:boolean,
@@ -124,23 +132,31 @@ export class CustomerService {
     this.aOneCls.next(aOneCls),this.aCls.next(aCls),this.bOneCls.next(bOneCls),this.bCls.next(bCls),this.gOneCls.next(gOneCls),this.cOnecls.next(cOnecls),this.cCls.next(cCls),this.dOneCls.next(dOneCls),this.dCls.next(dCls),this.jCls.next(jCls),this.gCls.next(gCls),this.dECls.next(dECls),this.cECls.next(cECls)
     this.examDate.next(examDate),this.chagedPay.next(chagedPay),this.advPay.next(advPay),this.remainingPay.next(remainingPay),this.chargedOfficer.next(chargedOfficer),this.branch.next(branch),this.date.next(date)
   }
+ /* getSelectedCustomerNic(passedNicFromHome:string) {
+     this.selectedNic.next(passedNicFromHome)
+     console.log(this.getCustomerByNicApi)
+  }*/
 
-  createAuthorizationHeader(headers: Headers) {
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'application/json');
+  getCustomers(): Observable<any>{
+    return this._http.get<any>(this.getAllCustomersApi);
   }
+
+  /*getByNicCall(): Observable<any>{
+    return this._http.get<any>(this.getCustomerByNicApi)
+  }*/
 
   register(newCustomer){
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-     return this._http.post<any>(this.registerApi, newCustomer,{headers: new HttpHeaders({
+    return this._http.post<any>(this.registerApi, newCustomer,{headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*'
       })});
   }
 
-  getCustomers(): Observable<ICustomers[]>{
-    return this._http.get<ICustomers[]>(this.getAllCustomersApi);
+  createAuthorizationHeader(headers: Headers) {
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
   }
 }
