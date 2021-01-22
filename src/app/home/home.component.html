@@ -43,7 +43,7 @@
 
       <ng-container matColumnDef="nic">
         <th mat-header-cell *matHeaderCellDef> NIC </th>
-        <td mat-cell *matCellDef="let element" routerLink="admin/api/nic" (click)="onSelectRaw(element)"> <!--<a href="url">-->{{element.nicNumber}} <!--</a>--></td>
+        <td mat-cell *matCellDef="let element" routerLink="searchByNic" (click)="onSelectRaw(element)"> {{element.nicNumber}} </td>
       </ng-container>
 
       <ng-container matColumnDef="chargedOfficer">

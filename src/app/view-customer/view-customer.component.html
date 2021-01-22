@@ -1,3 +1,148 @@
 <div class="container">
-<h1>hi</h1>
+  <div class="row no-gutters align-self-center">
+    <div class="col" style="text-align:center;text-decoration: underline overline;">
+      <h1> Bandula Driving School </h1>
+    </div>
+  </div>
+
+  <div class="row no-gutters">
+    <div class="col-6">
+      <h3 style="text-decoration: underline">Customer Details </h3>
+      <p>Sur name : {{selectedCustomer?.surName}}</p>
+      <p>Name without sur name : {{selectedCustomer?.cusName}}</p>
+      <p>NIC number : {{selectedCustomer?.nicNumber}}</p>
+      <p *ngIf="selectedCustomer?.gender">Gender : Male <img src="../../assets/icons/male.png" alt="male icon" width="20" height="20"></p>
+      <p *ngIf="!selectedCustomer?.gender">Gender : Female <img src="../../assets/icons/female.png" alt="female icon" width="20" height="20"></p>
+      <p>Birthday : {{birthday}}</p>
+    </div>
+    <div class="col-3">
+      <div class="address">
+        <h4>Bill nu : A{{selectedCustomer?.customerId}} </h4>
+        <p>Contact numbers : </p>
+        <p>{{selectedCustomer?.contactDetailsEntity.mobilePrimary}}</p>
+        <p>{{selectedCustomer?.contactDetailsEntity.mobileSecondary}}</p>
+        <p>{{selectedCustomer?.contactDetailsEntity.landNumber}}</p>
+        <p class="font-weight-bolder" *ngFor="let exam of selectedCustomer?.writtenExamDetailsE1ntitySet">Written exam date : {{exam?.examDate}}</p>
+        <p class="font-weight-bolder" *ngFor="let exam of selectedCustomer?.writtenExamDetailsE1ntitySet">Exam marks : {{exam?.examMarks}}</p>
+        <p class="font-weight-bolder" *ngFor="let exam of selectedCustomer?.writtenExamDetailsE1ntitySet">Exam status : {{exam?.examStatus}}</p>
+        <p class="font-weight-bolder" *ngFor="let trail of selectedCustomer?.trailDetailsEntitySet">Trail date : {{trail?.trailDate}}</p>
+        <p class="font-weight-bolder" *ngFor="let trail of selectedCustomer?.trailDetailsEntitySet">Trail status : {{trail?.trailStatus}}</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <img
+        src="../../assets/img/circle-croppedLogo.png"
+        alt="logotipo"
+        class="logotype" width="148" height="130" style="position: sticky;">
+    </div>
+  </div>
+
+  <div class="row no-gutters items-group">
+    <div class="col-6"><p>Applied driving licence classes : </p></div>
+    <div class="col-6">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.a" src="../../assets/icons/A1.png" alt="image ACtrl">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.a1" src="../../assets/icons/A.png" alt="image aCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.b1" src="../../assets/icons/B1.png" alt="image bOneCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.b" src="../../assets/icons/B.png" alt="image bCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.g1" src="../../assets/icons/G1.png" alt="image gOneCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.c1" src="../../assets/icons/C1.png" alt="image cOnecls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.c" src="../../assets/icons/C.png" alt="image cCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.d1" src="../../assets/icons/D1.png" alt="image dOneCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.d" src="../../assets/icons/D.png" alt="image dCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.j" src="../../assets/icons/J.png" alt="image jCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.g" src="../../assets/icons/G.png" alt="image gCls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.de" src="../../assets/icons/DE.png" alt="image dECls">
+      <img *ngIf="selectedCustomer?.vehicleClassesEntity.ce" src="../../assets/icons/CE.png" alt="image cECls">
+    </div>
+  </div>
+
+  <div class="row no-gutters items-group">
+    <div class="col-8">
+      <p>Contact address :</p>
+      <p class="font-weight-bold">{{selectedCustomer?.contactDetailsEntity.homeName}},
+        {{selectedCustomer?.contactDetailsEntity.streetName}},
+        {{selectedCustomer?.contactDetailsEntity.villageName}},
+        {{selectedCustomer?.contactDetailsEntity.cityName}},
+        {{selectedCustomer?.contactDetailsEntity.district}}
+      </p>
+    </div>
+
+    <div class="col-4">
+      <p>Old driving licence number : {{selectedCustomer?.oldLicenNum}}</p>
+      <p>Old driving license date : {{oldLicenseDate}}</p>
+    </div>
+  </div>
+
+  <div class="row no-gutters">
+    <div class="col">
+      <p>Full amount : {{selectedCustomer?.advancedPaymentEntity.amountChargeable}}.00/=</p>
+    </div>
+    <div class="col">
+      <p>Advanced payment : {{selectedCustomer?.advancedPaymentEntity.advancedPayment}}.00/=</p>
+    </div>
+    <div class="col">
+      <p class="font-weight-bolder">Remaining payment : {{selectedCustomer?.advancedPaymentEntity.remainingPayment}}.00/=</p>
+    </div>
+    <div class="col">
+      <p>Charged Officer : {{selectedCustomer?.advancedPaymentEntity.chargedOfficer}}</p>
+    </div>
+    <div class="col">
+      <p>Branch : {{selectedCustomer?.advancedPaymentEntity.branch}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="afterPayment">
+  <div class="row no-gutters" *ngFor="let payments of selectedCustomer?.paymentsDetailsEntitySet">
+    <div class="col">
+      <p>Bill number : B{{payments?.billId}}</p>
+    </div>
+    <div class="col">
+      <p>Payments : {{payments?.paymentsAfterRegister}}.00/=</p>
+    </div>
+    <div class="col">
+      <p>Date : {{payments?.paymentDate}}</p>
+    </div>
+    <div class="col">
+      <p>Charged Officer : {{payments?.chargedOfficer}}</p>
+    </div>
+    <div class="col">
+      <p>Branch : {{payments?.branch}}</p>
+    </div>
+  </div>
+  </div>
+
+
+  <div class="row no-gutters">
+    <div class="col">
+      <button routerLink="paymentForm" mat-icon-button mat-button class="btn btn-warning" type="submit">Add Payment</button>
+    </div>
+    <div class="col">
+      <button routerLink="editCustomerBasics" mat-icon-button mat-button class="btn btn-danger" type="submit">Edit Basics</button>
+    </div>
+    <div class="col">
+      <button routerLink="printNewCustomer" mat-icon-button mat-button class="btn btn-primary" type="submit">Add Exam date</button>
+    </div>
+    <div class="col">
+      <button routerLink="printDummy" mat-icon-button mat-button class="btn btn-success" type="submit">Print Dummy</button>
+    </div>
+  </div>
+  <br>
+  <div class="row no-gutters">
+  <div class="col">
+      <button routerLink="printNewCustomer" mat-icon-button mat-button class="btn btn-info" type="submit">Add Exam Results</button>
+    </div>
+    <div class="col">
+      <button routerLink="printNewCustomer" mat-icon-button mat-button class="btn btn-primary" type="submit">Add Trail Date</button>
+    </div>
+    <div class="col">
+      <button routerLink="printNewCustomer" mat-icon-button mat-button class="btn btn-dark" type="submit">Add Trail Results</button>
+    </div>
+    <div class="col">
+      <button mat-raised-button class="btn btn-danger" (click)="editExam()">Update exam date</button>
+    </div>
+   <!-- <div *ngIf="updatedExamDate">
+      You chose: <i>{{updatedExamDate}}</i>
+    </div>-->
+  </div>
 </div>
+

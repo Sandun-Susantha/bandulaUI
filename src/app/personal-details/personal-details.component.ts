@@ -1,14 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule , FormsModule} from '@angular/forms';
 import { CustomerService } from '../services/customer.service'
-
-import {
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-  MAT_MOMENT_DATE_FORMATS
-} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-// import { DataService } from '../services/register-new-customer.service'
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS} from '@angular/material-moment-adapter';
 
 import * as moment from 'moment';
 
@@ -65,10 +59,8 @@ export class PersonalDetailsComponent implements OnInit {
       surNameCtrl: ['', [Validators.required, Validators.pattern("[a-zA-Z ]*")]],
       lastNameCtrl: ['', [Validators.required,Validators.pattern("[a-zA-Z ]*")]],
       nicCtrl: new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(13)]),
-      // birthdayCtrl: [new FormControl()],
       birthdayCtrl: [new FormControl()],
       descriptionCtrl: [''],
-      // displayBirthday:[new FormControl(moment(this.personalFormGroup.controls.birthdayCtrl.value).format('YYYY-MM-DD'))]
     });
 
     this.contactFormGroup = this.formStepper.group({
@@ -113,7 +105,6 @@ export class PersonalDetailsComponent implements OnInit {
       heavyVehiCtrl: ['']
     });
     this.reviewFormGroup = this.formStepper.group({
-      // displayBirthday : moment(this.personalFormGroup.getRawValue().birthdayCtrl).format('YYYY-MM-DD'),
       reviewCtrl: ['', Validators.required],
       chargedOfficerCtrl: new FormControl('Ms. Saranga'),
     });
@@ -259,6 +250,7 @@ export class PersonalDetailsComponent implements OnInit {
 
   updateBirthdayByNic(){
     this.personalFormGroup.controls.birthdayCtrl.setValue(this.birthDayCal);
+    this.displayBirthday = moment(this.personalFormGroup.getRawValue().birthdayCtrl).format('YYYY-MM-DD');
   }
 
   onBirthday(){
@@ -281,7 +273,7 @@ export class PersonalDetailsComponent implements OnInit {
   newCustomer(){
     this.newCustomerData.register(
       "{"+"\"surName\":\""+this.personalFormGroup.controls.surNameCtrl.value+"\",\"cusName\":\""+this.personalFormGroup.controls.lastNameCtrl.value+"\",\"gender\":\""+this.genderValue
-      +"\",\"oldLicenNum\":\""+this.oldLicenseFormGroup.controls.oldLicenseCtrl.value+"\",\"licenDate\":\""+this.diaplayLicenDate+"\",\"nicNumber\":\""+this.personalFormGroup.controls.nicCtrl.value
+        +"\",\"oldLicenNum\":\""+this.oldLicenseFormGroup.controls.oldLicenseCtrl.value+"\",\"licenDate\":\""+this.diaplayLicenDate+"\",\"nicNumber\":\""+this.personalFormGroup.controls.nicCtrl.value
       +"\",\"birthDay\":\""+this.displayBirthday+"\",\"isShortTerm\":\""+this.isShortTerm+"\",\"description\":\""+this.personalFormGroup.controls.descriptionCtrl.value
       +"\",\"medicalNu\":\""+this.oldLicenseFormGroup.controls.medicalNumberCtrl.value+"\",\"medicalDate\":\""+this.displayMedicalDate+"\",\"bloodGroup\":\""
       +this.oldLicenseFormGroup.controls.bloodControl.value+"\","+"\"writtenExamDetailsBeanList\":[{\"newExamDate\":\""+this.displayExam+"\"}]"+","

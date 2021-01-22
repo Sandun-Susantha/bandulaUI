@@ -177,7 +177,7 @@
 
           <mat-grid-tile>
             <mat-form-field appearance="fill">
-              <mat-label>01/30/1998-licenseDate</mat-label>
+              <mat-label>November 19, 2020-licenseDate</mat-label>
               <input matInput [matDatepicker]="licenDate" formControlName="licenseDateCtrl" (dateInput)="onLicenDate()">
               <mat-datepicker-toggle matSuffix [for]="licenDate"></mat-datepicker-toggle>
               <mat-datepicker #licenDate></mat-datepicker>
@@ -564,7 +564,7 @@
 
         <div>
           <button mat-button matStepperPrevious class="btn btn-primary float-left">Back</button>
-          <button routerLink="printNewCustomer" mat-icon-button mat-button (click)="newCustomer()" class="btn btn-primary float-right" type="submit">Print & Save</button>
+          <button routerLink="printNewCustomer" mat-icon-button mat-button (click)="newCustomer()" class="btn btn-primary float-right" type="submit">Add customer</button>
 <!--          <button mat-icon-button mat-button (click)="newCustomer()" class="btn btn-primary float-right" type="submit">Print & Save</button>-->
           <button mat-button class="btn btn-danger float-right" (click)="stepper.reset()">Reset</button>
         </div>

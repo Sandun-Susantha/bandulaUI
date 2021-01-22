@@ -11,12 +11,13 @@
       <p>Sur name : {{surName}}</p>
       <p>Name without sur name : {{lastName}}</p>
       <p>NIC number : {{nic}}</p>
-      <p>Gender : {{gender}}</p>
+      <p *ngIf="gender==male">Gender : Male <img src="../../assets/icons/male.png" alt="male icon" width="20" height="20"></p>
+      <p *ngIf="gender==female">Gender : Female <img src="../../assets/icons/female.png" alt="female icon" width="20" height="20"></p>
       <p>Birthday : {{birthday}}</p>
     </div>
     <div class="col-3">
       <div class="address">
-        <h4>Bill nu : {{billNu}} </h4>
+        <h4>Bill nu : A{{billNu}} </h4>
         <p>bandulalearners@gmail.com</p>
         <p>No 08, Old private bus stand</p>
         <p>Mahiyanganaya</p>
@@ -119,7 +120,5 @@
       <p class="font-weight-bold">Date : {{date}}</p>
     </div>
   </div>
-  <br>
-<!--  <button (click)="printPage()" id="print_button" class="btn btn-success float-right">print</button>-->
 </div>
 

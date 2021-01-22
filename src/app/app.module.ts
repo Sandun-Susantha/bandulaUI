@@ -13,7 +13,13 @@ import { PrintRegisterationComponent } from './print-registeration/print-registe
 import { HttpClientModule} from "@angular/common/http";
 import { RegistrationBillComponent } from './registration-bill/registration-bill.component';
 import { PrintButtonComponent } from './print-button/print-button.component';
-import { ViewCustomerComponent } from './view-customer/view-customer.component';
+import {EditExamDate, ViewCustomerComponent} from './view-customer/view-customer.component';
+import { EditCustomerBasicsComponent } from './edit-customer-basics/edit-customer-basics.component';
+import { AddPaymentsComponent } from './add-payments/add-payments.component';
+import { PaymentsFormComponent } from './add-payments/payments-form/payments-form.component';
+import { PaymentPrintComponent } from './add-payments/payment-print/payment-print.component';
+import {MatRadioModule} from "@angular/material/radio";
+import { CustomerDummyComponent } from './customer-dummy/customer-dummy.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,13 @@ import { ViewCustomerComponent } from './view-customer/view-customer.component';
     PrintRegisterationComponent,
     RegistrationBillComponent,
     PrintButtonComponent,
-    ViewCustomerComponent
+    ViewCustomerComponent,
+    EditCustomerBasicsComponent,
+    AddPaymentsComponent,
+    PaymentsFormComponent,
+    PaymentPrintComponent,
+    EditExamDate,
+    CustomerDummyComponent
   ],
     imports: [
         BrowserModule,
@@ -33,7 +45,8 @@ import { ViewCustomerComponent } from './view-customer/view-customer.component';
         MaterialModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatRadioModule
     ],
   providers: [],
   bootstrap: [AppComponent]

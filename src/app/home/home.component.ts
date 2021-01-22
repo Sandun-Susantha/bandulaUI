@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { CustomerService } from '../services/customer.service'
-import { ICustomers} from "../../assets/icustomers";
+import {CustomerService } from '../services/customer.service'
+import {ICustomers} from "../../assets/icustomers";
 import {ViewCustomerService} from "../services/view-customer.service";
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   customers: ICustomers[];
 
   displayedColumns: string[] = ['billNu', 'customerName', 'villageName', 'cityName', 'contactNum', 'examDate', 'remainingPay', 'chargedOfficer', 'nic'];
-  dataSource = new MatTableDataSource<ICustomers>(this.customers);
+  dataSource : MatTableDataSource<ICustomers>
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -37,15 +37,7 @@ export class HomeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onSelectRaw(customer : ICustomers){
-
+  onSelectRaw(customer : ICustomers) {
     this._viewService.getSelectedCustomerNic(customer.nicNumber.toString())
-
-    new Promise((resolve) => {
-      setTimeout(() => {
-        // this._viewService.getSelectedCustomerNic(customer.nicNumber.toString())
-        resolve();
-      }, 8000);
-    });
   }
 }

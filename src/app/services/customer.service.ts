@@ -132,18 +132,10 @@ export class CustomerService {
     this.aOneCls.next(aOneCls),this.aCls.next(aCls),this.bOneCls.next(bOneCls),this.bCls.next(bCls),this.gOneCls.next(gOneCls),this.cOnecls.next(cOnecls),this.cCls.next(cCls),this.dOneCls.next(dOneCls),this.dCls.next(dCls),this.jCls.next(jCls),this.gCls.next(gCls),this.dECls.next(dECls),this.cECls.next(cECls)
     this.examDate.next(examDate),this.chagedPay.next(chagedPay),this.advPay.next(advPay),this.remainingPay.next(remainingPay),this.chargedOfficer.next(chargedOfficer),this.branch.next(branch),this.date.next(date)
   }
- /* getSelectedCustomerNic(passedNicFromHome:string) {
-     this.selectedNic.next(passedNicFromHome)
-     console.log(this.getCustomerByNicApi)
-  }*/
 
   getCustomers(): Observable<any>{
     return this._http.get<any>(this.getAllCustomersApi);
   }
-
-  /*getByNicCall(): Observable<any>{
-    return this._http.get<any>(this.getCustomerByNicApi)
-  }*/
 
   register(newCustomer){
     let headers = new Headers();

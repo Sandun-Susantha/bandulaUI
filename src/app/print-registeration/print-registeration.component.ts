@@ -9,53 +9,13 @@ import {register} from "ts-node";
 })
 export class PrintRegisterationComponent implements OnInit {
 
-  billNu:string
-
-  surName:string
-  lastName:string
-  nic:string
-  birthday:string
-  gender:string
-  description:string
-
-  mobile:string
-  landNumber:string
-  secondaryMobile:string
-  email:string
-
-  homeName:string
-  streetName:string
-  villageName:string
-  cityName:string
-  district:string
-
-  oldLicenNumber:string
-  oldLicenDate:string
-  medicalNum:string
-  bloodGroup:string
-  medicalDate:string
-
-  ACtrl:boolean
-  aCls:boolean
-  bOneCls:boolean
-  bCls:boolean
-  gOneCls:boolean
-  cOnecls:boolean
-  cCls:boolean
-  dOneCls:boolean
-  dCls:boolean
-  jCls:boolean
-  gCls:boolean
-  dECls:boolean
-  cECls:boolean
-
-  examDate:string
-  chagedPay:string
-  advPay:string
-  remainingPay:number
-  chargedOfficer:string
-  branch:string
-  date:string
+  male="Male"
+  female="Female"
+  billNu:string;surName:string;lastName:string;nic:string;birthday:string;gender:string;description:string
+  mobile:string;landNumber:string;secondaryMobile:string;email:string;homeName:string;streetName:string;villageName:string;cityName:string;district:string
+  oldLicenNumber:string;oldLicenDate:string;medicalNum:string;bloodGroup:string;medicalDate:string
+  ACtrl:boolean;aCls:boolean;bOneCls:boolean;bCls:boolean;gOneCls:boolean;cOnecls:boolean;cCls:boolean;dOneCls:boolean;dCls:boolean;jCls:boolean;gCls:boolean;dECls:boolean;cECls:boolean
+  examDate:string;chagedPay:string;advPay:string;remainingPay:number;chargedOfficer:string;branch:string;date:string
 
   constructor(private newCustomerDetails: CustomerService) { }
 
